@@ -1,0 +1,102 @@
+[
+  {
+    "id": "fd58c045-3d69-45c6-80a9-cb3088dcb720",
+    "type": "table",
+    "props": {
+      "textColor": "default",
+      "backgroundColor": "default"
+    },
+    "content": {
+      "type": "tableContent",
+      "rows": [
+        {
+          "cells": [
+            [
+              {
+                "type": "text",
+                "text": "1a",
+                "styles": {}
+              },
+              {
+                "type": "link",
+                "href": "adsfasdfasdf']",
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "sdf",
+                    "styles": {}
+                  }
+                ]
+              },
+              {
+                "type": "text",
+                "text": "as",
+                "styles": {}
+              },
+              {
+                "type": "text",
+                "text": "dfafsd",
+                "styles": {
+                  "bold": true,
+                  "backgroundColor": "pink"
+                }
+              }
+            ],
+            [
+              {
+                "type": "text",
+                "text": "2",
+                "styles": {}
+              }
+            ],
+            [
+              {
+                "type": "text",
+                "text": "3",
+                "styles": {}
+              }
+            ]
+          ]
+        },
+        {
+          "cells": [
+            [
+              {
+                "type": "text",
+                "text": "4",
+                "styles": {}
+              }
+            ],
+            [
+              {
+                "type": "text",
+                "text": "5",
+                "styles": {}
+              }
+            ],
+            [
+              {
+                "type": "text",
+                "text": "6",
+                "styles": {}
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    "children": []
+  },
+  {
+    "id": "4d50e513-09ab-4f6a-abd9-31236cd7bc37",
+    "type": "paragraph",
+    "props": {
+      "textColor": "default",
+      "backgroundColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [],
+    "children": []
+  }
+]
+

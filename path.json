@@ -1,0 +1,9 @@
+{
+  "paths": [
+    "/",
+    "/products",
+    "/login",
+    "/register",
+    "/not-found"
+  ]
+}

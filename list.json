@@ -1,0 +1,94 @@
+[
+  {
+    "id": "f8ddbc91-37a2-443e-b5f9-915d4b6208ab",
+    "type": "bulletListItem",
+    "props": {
+      "textColor": "default",
+      "backgroundColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [
+      {
+        "type": "text",
+        "text": "이건 첫번째 텍스트고",
+        "styles": {}
+      }
+    ],
+    "children": [
+      {
+        "id": "e5d33c41-758d-4564-9897-60c978acd3d9",
+        "type": "bulletListItem",
+        "props": {
+          "textColor": "default",
+          "backgroundColor": "default",
+          "textAlignment": "left"
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "이건 inner 텍스트고",
+            "styles": {}
+          }
+        ],
+        "children": [
+          {
+            "id": "23cdbd55-2856-4850-b60c-161a3467f612",
+            "type": "bulletListItem",
+            "props": {
+              "textColor": "default",
+              "backgroundColor": "default",
+              "textAlignment": "left"
+            },
+            "content": [
+              {
+                "type": "text",
+                "text": "이건 또 안에 있는 텍스트고~",
+                "styles": {}
+              }
+            ],
+            "children": [
+              {
+                "id": "6ac06b62-b04e-48b5-98fa-916d1e391bb2",
+                "type": "bulletListItem",
+                "props": {
+                  "textColor": "default",
+                  "backgroundColor": "default",
+                  "textAlignment": "left"
+                },
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "이건 또 또 안에 있는 텍스트야 !\n\nㅁㄴㅇㄹㄻㄴㅇ",
+                    "styles": {}
+                  }
+                ],
+                "children": []
+              },
+              {
+                "id": "afc40c49-0caa-43f3-b1a2-eb00d0a436e5",
+                "type": "bulletListItem",
+                "props": {
+                  "textColor": "default",
+                  "backgroundColor": "default",
+                  "textAlignment": "left"
+                },
+                "content": [],
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "202d8413-20ac-46ab-866a-fda9428b27ea",
+    "type": "paragraph",
+    "props": {
+      "textColor": "default",
+      "backgroundColor": "default",
+      "textAlignment": "left"
+    },
+    "content": [],
+    "children": []
+  },

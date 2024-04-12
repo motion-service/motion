@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+    reactStrictMode: false,
+    matcher: '/',
+
+};
 
 export default nextConfig;
