@@ -50,10 +50,19 @@ export async function POST(req: NextRequest, res: NextResponse) {
                 if (data.nickname === name && data.password === password) {
                     let cookie_store = cookies();
                     let objectId = user._id;
+                    const oneDay = 24 * 60 * 60 * 1000
 
                     if (objectId !== undefined) {
                         id = objectId.toString();
-                        cookie_store.set("user", objectId.toString())
+
+                        cookie_store.set({
+                            name: "user",
+                            value: id,
+                            httpOnly: true,
+                            path: '/',
+                            expires: Date.now() + (oneDay * 10)
+                        });
+
                         loginStatus = "authenticated";
 
                     }
