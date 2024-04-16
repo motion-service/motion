@@ -6,7 +6,7 @@ import {useQuery} from "react-query";
 import {Button} from "@/app/components/ui/button";
 import {Block} from "@/app/components/props/block";
 import {LoadPages} from "@/app/lib/page/page";
-import {CreateBlock} from "@/app/lib/block/block";
+import {CreateBlock, LoadAllBlock} from "@/app/lib/block/block";
 
 interface EditorProp {
     uuid: string;
@@ -14,22 +14,12 @@ interface EditorProp {
 }
 
 export const Editor: React.FC<EditorProp> = ({uuid, owner}: EditorProp) => {
-    const {data, error} = useQuery(['pages', uuid], async () => await LoadPages(owner));
+    const {data, error} = useQuery(['pages', uuid], async () => await LoadPages(uuid));
     const [currentPage, setCurrentPage] = useState<Page>();
-
     const [blocks, setBlocks] = useState<IBlock[]>([]);
     const [selectedIndex, setSelectedIndex] = useState<number>();
-
     const [selectCount, setSelectCount] = useState<number>(0);
 
-    useEffect(() => {
-        console.log()
-    });
-
-
-    /**
-     * Loaded Pages & set Current Page
-     */
     useEffect(() => {
         const filteredPages = data?.filter(page => page.metadata.url === uuid);
 
@@ -38,25 +28,18 @@ export const Editor: React.FC<EditorProp> = ({uuid, owner}: EditorProp) => {
         }
     }, [data]);
 
-    /**
-     * Loaded current page's block
-     */
     useEffect(() => {
-        if (currentPage !== undefined)
-            setBlocks(currentPage.blocks);
+        LoadAllBlock(uuid).then(blocks => {
+            setBlocks(blocks)
+        });
+    }, []);
 
-    }, [currentPage]);
-
-    /**
-     * Added block into contents & send fetch request
-     */
     const addNewBlock = () => {
         CreateBlock(uuid).then();
         let new_block: IBlock = {
             content: [],
-            type: "Text",
-            value: ""
-
+            isEditing: false,
+            pageId: ""
         }
 
         setBlocks(prevBlocks => [...prevBlocks, new_block]);
@@ -64,28 +47,6 @@ export const Editor: React.FC<EditorProp> = ({uuid, owner}: EditorProp) => {
 
     const onDeleteHandler = () => {
 
-    }
-
-    const handleSelectAll = () => {
-        if (selectCount == 1) {
-            setSelectCount(0);
-
-            //TODO select all
-            return;
-        }
-
-        setSelectCount(prevState => ++prevState);
-    }
-    const handleArrowUp = () => {
-
-    }
-
-    const handleAddBlock = () => {
-
-    }
-
-    const handleDelete = () => {
-        setBlocks(blocks.slice(selectedIndex));
     }
 
     return (
@@ -107,9 +68,7 @@ export const Editor: React.FC<EditorProp> = ({uuid, owner}: EditorProp) => {
                                 <Block block={block} key={index}
                                        url={uuid}
                                        index={index}
-                                       setSelectedIndex={setSelectedIndex}
-                                       handleAddBlock={handleAddBlock} handleArrowUp={handleArrowUp}
-                                       handleDelete={handleDelete} handleSelectAll={handleSelectAll}/>
+                                       setSelectedIndex={setSelectedIndex}/>
                             )
                         })
                     }
