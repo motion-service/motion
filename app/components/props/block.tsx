@@ -1,15 +1,10 @@
 "use client"
 import React, {SyntheticEvent, useEffect, useState} from "react";
 import {TextBlock} from "@/app/components/ui/text-block";
-import {TableBlock} from "@/app/components/ui/table-block";
 import {TextMenu} from "@/app/components/ui/text-menu";
 
 interface BlockProp {
     block: IBlock;
-    handleSelectAll: () => void;
-    handleDelete: () => void;
-    handleAddBlock: () => void;
-    handleArrowUp: () => void;
     setSelectedIndex: React.Dispatch<React.SetStateAction<any>>
     url: string;
     index?: number;
@@ -19,10 +14,6 @@ export const Block = ({
                           url,
                           index,
                           block,
-                          handleDelete,
-                          handleSelectAll,
-                          handleAddBlock,
-                          handleArrowUp,
                           setSelectedIndex
 
                       }: BlockProp) => {
@@ -36,10 +27,10 @@ export const Block = ({
     useEffect(() => {
         let test = "";
 
-        block.content.map(content => {
-            let text = content.text;
-            test += text;
-        })
+        // block.content.map(content => {
+        //     let text = content.text;
+        //     test += text;
+        // })
 
         setOriginText(test);
     }, []);
@@ -78,45 +69,24 @@ export const Block = ({
                  setHovered(false)
              }}
         >
-            {
-
-            }
-            <div
-                className="min-h-10"
-                suppressContentEditableWarning={true}
-                contentEditable={true}
-                onKeyDown={(event) => {
-                    if (event.ctrlKey && event.key === "a") {
-                        handleSelectAll();
-                        return;
-                    }
-
-                    switch (event.key) {
-                        case "ArrowUp":
-                            handleArrowUp();
-                            break;
-                        case "Enter" :
-                            handleAddBlock();
-                            break;
-                        case "Backspace":
-                            handleDelete();
-                            break;
-                    }
-                }
-                }
-                onSelect={(event) => {
-                    handleSelect(event);
-                }}>
+            <div>
 
                 {selectedText && (
                     <TextMenu position={{x: menuPosition.x, y: menuPosition.y}} selectedIndex={index}
-                              selectedText={selectedText} contents={block.content}
+                              selectedText={selectedText}
                               text={selectedText} url={url} start={start} end={end}/>
                 )}
                 {
-                    block.type === "Text" && <TextBlock contents={block.content} key={1}/> ||
-                    block.type === "Table" && <TableBlock rows={[]}/>
+                    block?.content.map((content: IContent, index) => {
+                        return (
+                            <TextBlock words={content.words} key={index}/>
+                        )
+                    })
                 }
+                {/*{*/}
+                {/*    block.type === "Text" && <TextBlock style={block.con} text={block.value} key={1}/> ||*/}
+                {/*    block.type === "Table" && <TableBlock rows={[]}/>*/}
+                {/*}*/}
             </div>
         </div>
     )
