@@ -8,13 +8,18 @@ export default function middleware(req: NextRequest) {
     const cookieStore = cookies()
 
     let user = cookieStore.get("user");
+    let link = cookieStore.get("link");
 
-    if (user !== undefined) {
+    if (user !== undefined && link !== undefined) {
+        if (req.nextUrl.pathname !== `/${link.value}`) {
+
+        }
+
         if (req.nextUrl.pathname !== `/${user.value}`) {
             return NextResponse.redirect(new URL(`/${user.value}`, req.url));
         }
     } else {
-        console.log("test")
+
     }
 }
 export const config = {
