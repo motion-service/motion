@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export async function SaveBlocks(url: string, text: string, status: boolean, type: TextDecoration, selectedIndex?: number, start?: number, end?: number) {
     await fetch(`http://localhost:8090/editor/block/style/edit/${url}/${1}/${start}/${end}`, {
         method: 'POST',
@@ -16,6 +18,30 @@ export async function SaveBlocks(url: string, text: string, status: boolean, typ
             "children": []
         }),
     });
+}
+
+export async function LoadAllBlock(uuid: string) {
+    let blocks: IBlock[] = [];
+    let contents: IContent[] = [];
+
+    axios.post(`http://localhost:8090/editor/block/load/${uuid}`).then(value => {
+        let data = value.data;
+
+        data.map((element: any) => {
+            let content = element.content;
+            contents.push(content)
+        });
+
+        let block: IBlock = {
+            pageId: uuid,
+            content: contents,
+            isEditing: false
+        };
+
+        blocks.push(block);
+    });
+
+    return blocks;
 }
 
 /**
