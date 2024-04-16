@@ -15,12 +15,11 @@ interface TextMenuProp {
     selectedIndex?: number;
     url: string;
     text: string;
-    contents: IContent[];
     start?: number;
     end?: number;
 }
 
-export const TextMenu = ({position, text, url, selectedText, selectedIndex, contents, start, end}: TextMenuProp) => {
+export const TextMenu = ({position, text, url, selectedText, selectedIndex, start, end}: TextMenuProp) => {
 
     return (
         <div
