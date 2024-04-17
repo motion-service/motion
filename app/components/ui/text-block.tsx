@@ -94,7 +94,54 @@ export const TextBlock: React.FC<TextProp> = ({words}) => {
     return (
         <div className="min-h-10" contentEditable={true}
              suppressContentEditableWarning={true}
-             onSelectCapture={event => {
+
+             onInput={(event) => {
+                 let textContent = event.currentTarget.textContent;
+
+             }}
+
+             onBlur={() => {
+
+             }}
+
+             onCopy={(event) => {
+
+                 console.log(event.clipboardData)
+             }}
+
+             onPaste={(event) => {
+                 event.preventDefault();
+                 let clipboardData = event.clipboardData.getData("text");
+                 if (selectedIndex !== undefined) {
+                     let result = results[selectedIndex];
+                     let result_text = result.text;
+                     let anchor = document.getSelection()?.anchorOffset;
+
+                     if(anchor !== undefined) {
+                         let test = result_text.charAt(anchor - 1);
+
+                         test += clipboardData;
+                         console.log(test)
+                         let new_result: IResult = {
+                             text: test,
+                             style: result.style
+                         }
+
+                         results.splice(results.indexOf(result), 1, new_result)
+                         console.log(results)
+                     }
+                 }
+             }}
+
+             onMouseUp={() => {
+
+             }}
+
+             onCut={() => {
+
+             }}
+
+             onSelectCapture={() => {
                  let focusNode = document.getSelection()?.focusNode?.textContent;
 
                  if (focusNode !== undefined || focusNode !== null) {
