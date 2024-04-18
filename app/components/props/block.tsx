@@ -1,5 +1,5 @@
 "use client"
-import React, {SyntheticEvent, useEffect, useState} from "react";
+import React, {SyntheticEvent, useEffect, useRef, useState} from "react";
 import {TextBlock} from "@/app/components/ui/text-block";
 import {TextMenu} from "@/app/components/ui/text-menu";
 
@@ -23,7 +23,7 @@ export const Block = ({
     const [start, setStart] = useState<number>();
     const [end, setEnd] = useState<number>();
     const [originText, setOriginText] = useState<string>();
-
+    const ref = useRef(null);
     useEffect(() => {
         let test = "";
 
@@ -79,7 +79,7 @@ export const Block = ({
                 {
                     block?.content.map((content: IContent, index) => {
                         return (
-                            <TextBlock words={content.words} key={index}/>
+                            <TextBlock words={content.words} key={index} ref={ref}/>
                         )
                     })
                 }

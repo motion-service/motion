@@ -1,5 +1,5 @@
 "use client"
-import React, {useState} from "react";
+import React, {forwardRef, useState} from "react";
 import {TextBlockItem} from "@/app/components/ui/textblock-item";
 import {useTextBlock} from "@/app/hook/useTextBlock";
 
@@ -7,7 +7,7 @@ interface TextProp {
     words: IWord
 }
 
-export const TextBlock: React.FC<TextProp> = ({words}) => {
+export const TextBlock = forwardRef(function TextBlock({words}: TextProp, ref) {
     let [selectedIndex, setSelectedIndex] = useState<number>();
     let {results} = useTextBlock({words});
 
@@ -20,7 +20,7 @@ export const TextBlock: React.FC<TextProp> = ({words}) => {
             let anchor = document.getSelection()?.anchorOffset;
 
             if (anchor !== undefined) {
-                let test = result_text.charAt(anchor - 1);
+                let test = result_text.charAt(anchor);
                 test += clipboardData;
 
                 let new_result: IResult = {
@@ -28,7 +28,8 @@ export const TextBlock: React.FC<TextProp> = ({words}) => {
                     style: result.style
                 }
 
-                results.splice(results.indexOf(result), 1, new_result)
+                results.splice(results.indexOf(result), 1, new_result);
+
             }
         }
     }
@@ -37,9 +38,6 @@ export const TextBlock: React.FC<TextProp> = ({words}) => {
 
     }
 
-    const onMouseUp = (event: React.MouseEvent<HTMLDivElement>) => {
-
-    }
 
     const onCut = (event: React.ClipboardEvent<HTMLDivElement>) => {
 
@@ -52,6 +50,14 @@ export const TextBlock: React.FC<TextProp> = ({words}) => {
 
     const onInput = (event: React.FormEvent<HTMLDivElement>) => {
         let textContent = event.currentTarget.textContent;
+    }
+
+    const onArrowUp = () => {
+
+    }
+
+    const onArrowDown = () => {
+
     }
 
     const onScreenCapture = () => {
@@ -73,6 +79,20 @@ export const TextBlock: React.FC<TextProp> = ({words}) => {
                  onInput(event);
              }}
 
+             onKeyDown={event => {
+                 let key = event.key;
+
+                 switch (key) {
+                     case "ArrowUp":
+                         onArrowUp();
+                         break;
+
+                     case "ArrowDown":
+                         onArrowDown();
+                         break;
+                 }
+             }}
+
              onBlur={(event) => {
 
              }}
@@ -83,10 +103,6 @@ export const TextBlock: React.FC<TextProp> = ({words}) => {
 
              onPaste={(event) => {
                  onPaste(event);
-             }}
-
-             onMouseUp={(event) => {
-                 onMouseUp(event);
              }}
 
              onCut={(event) => {
@@ -109,4 +125,4 @@ export const TextBlock: React.FC<TextProp> = ({words}) => {
             }
         </div>
     );
-};
+})
