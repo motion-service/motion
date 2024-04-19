@@ -12,26 +12,7 @@ export const TextBlock = forwardRef(function TextBlock({words}: TextProp, ref) {
     let {results} = useTextBlock({words});
 
     const onPaste = (event: React.ClipboardEvent<HTMLDivElement>) => {
-        event.preventDefault();
-        let clipboardData = event.clipboardData.getData("text");
-        if (selectedIndex !== undefined) {
-            let result = results[selectedIndex];
-            let result_text = result.text;
-            let anchor = document.getSelection()?.anchorOffset;
 
-            if (anchor !== undefined) {
-                let test = result_text.charAt(anchor);
-                test += clipboardData;
-
-                let new_result: IResult = {
-                    text: test,
-                    style: result.style
-                }
-
-                results.splice(results.indexOf(result), 1, new_result);
-
-            }
-        }
     }
 
     const onCopy = (event: React.ClipboardEvent<HTMLDivElement>) => {
@@ -72,7 +53,7 @@ export const TextBlock = forwardRef(function TextBlock({words}: TextProp, ref) {
     }
 
     return (
-        <div className="min-h-10" contentEditable={true}
+        <div className="min-h-10" contentEditable={"plaintext-only"}
              suppressContentEditableWarning={true}
 
              onInput={(event) => {
