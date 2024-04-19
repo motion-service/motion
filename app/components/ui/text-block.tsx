@@ -16,14 +16,24 @@ export const TextBlock = forwardRef(function TextBlock({words}: TextProp, ref) {
         let html = test.getData("text/html");
 
         let document = new DOMParser().parseFromString(html, "text/html");
-
         let table = document.getElementsByTagName("table")[0];
 
         if (table !== undefined) {
+            event.preventDefault();
+
             let head = table.tHead;
             let rows = table.rows;
 
-            console.log(rows)
+            for (let i = 0; i < rows.length; i++) {
+                let row = rows[i];
+                let cells = row.cells;
+                for (let j = 0; j < cells.length; j++) {
+                    let cell = cells[j];
+                    let content = cell.textContent;
+
+                    console.log(content)
+                }
+            }
         }
     }
 
