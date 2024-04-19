@@ -12,7 +12,19 @@ export const TextBlock = forwardRef(function TextBlock({words}: TextProp, ref) {
     let {results} = useTextBlock({words});
 
     const onPaste = (event: React.ClipboardEvent<HTMLDivElement>) => {
+        let test = event.clipboardData;
+        let html = test.getData("text/html");
 
+        let document = new DOMParser().parseFromString(html, "text/html");
+
+        let table = document.getElementsByTagName("table")[0];
+
+        if (table !== undefined) {
+            let head = table.tHead;
+            let rows = table.rows;
+
+            console.log(rows)
+        }
     }
 
     const onCopy = (event: React.ClipboardEvent<HTMLDivElement>) => {
