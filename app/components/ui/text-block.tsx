@@ -2,6 +2,8 @@
 import React, {forwardRef, useState} from "react";
 import {TextBlockItem} from "@/app/components/ui/textblock-item";
 import {useTextBlock} from "@/app/hook/useTextBlock";
+import {PastedType} from "@/app/types/types";
+import {Table} from "@/app/components/props/table";
 
 interface TextProp {
     words: IWord
@@ -9,6 +11,8 @@ interface TextProp {
 
 export const TextBlock = forwardRef(function TextBlock({words}: TextProp, ref) {
     let [selectedIndex, setSelectedIndex] = useState<number>();
+    let [pastedType, setPastedType] = useState<PastedType>("Text");
+    let [tableData, setTableData] = useState<string[][]>([]);
     let {results} = useTextBlock({words});
 
     const onPaste = (event: React.ClipboardEvent<HTMLDivElement>) => {
@@ -20,19 +24,26 @@ export const TextBlock = forwardRef(function TextBlock({words}: TextProp, ref) {
 
         if (table !== undefined) {
             event.preventDefault();
-
-            let head = table.tHead;
+            setPastedType("Table");
             let rows = table.rows;
 
             for (let i = 0; i < rows.length; i++) {
                 let row = rows[i];
                 let cells = row.cells;
+
+                let row_cell: string[] = [];
                 for (let j = 0; j < cells.length; j++) {
                     let cell = cells[j];
                     let content = cell.textContent;
 
-                    console.log(content)
+                    if (content !== null) {
+
+                        row_cell.push(content);
+                    }
                 }
+
+                tableData.push(row_cell);
+                setTableData(tableData);
             }
         }
     }
@@ -75,7 +86,7 @@ export const TextBlock = forwardRef(function TextBlock({words}: TextProp, ref) {
     }
 
     return (
-        <div className="min-h-10" contentEditable={"plaintext-only"}
+        <div className="min-h-10" contentEditable={pastedType == "Text" ? "plaintext-only" : "false"}
              suppressContentEditableWarning={true}
 
              onInput={(event) => {
@@ -120,11 +131,17 @@ export const TextBlock = forwardRef(function TextBlock({words}: TextProp, ref) {
                  onScreenCapture()
              }}>
             {
-                results.length !== 1 && results.map((result, index) => {
+                pastedType == "Text" ? results.length !== 1 && results.map((result, index) => {
                     return (
                         <TextBlockItem result={result} index={index} key={index}/>
                     )
-                })
+                }) :
+                    (pastedType === "Table" && tableData !== undefined ?
+                            <Table tableData={tableData}>
+
+                            </Table> :
+                            null
+                    )
             }
         </div>
     );
