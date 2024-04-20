@@ -18,16 +18,17 @@ export const Table = ({rows}: TableProp) => {
 
     }
 
-
     return (
-        <table>
+        <table className="">
             <tbody className="border-separate">
             {
                 rows.map((cells, rowPosition) => {
 
                     console.log(`rows `, rowPosition)
                     return (
-                        <tr key={rowPosition} onClick={() => {
+                        <tr key={rowPosition}
+
+                            onClick={() => {
                             console.log("clicked row", rowPosition)
                         }}>
                             {
@@ -42,7 +43,7 @@ export const Table = ({rows}: TableProp) => {
                                             handleClick();
                                             console.log("clicked cell", cellPosition)
                                         }}>
-                                            <div className={""}>
+                                            <div className={"min-h-10"}>
                                                 {
                                                     cell
                                                 }

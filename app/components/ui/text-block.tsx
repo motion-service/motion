@@ -4,6 +4,7 @@ import {TextBlockItem} from "@/app/components/ui/textblock-item";
 import {useTextBlock} from "@/app/hook/useTextBlock";
 import {PastedType} from "@/app/types/types";
 import {Table} from "@/app/components/props/table";
+import TableTest from "@/app/components/ui/table/table-test";
 
 interface TextProp {
     words: IWord
@@ -14,6 +15,13 @@ export const TextBlock = forwardRef(function TextBlock({words}: TextProp, ref) {
     let [pastedType, setPastedType] = useState<PastedType>("Text");
     let [tableData, setTableData] = useState<string[][]>([]);
     let {results} = useTextBlock({words});
+    const tableHeaders = [
+        "Items",
+        "Order #",
+        "Amount",
+        "Status",
+        "Delivery Driver"
+    ];
 
     const onPaste = (event: React.ClipboardEvent<HTMLDivElement>) => {
         let test = event.clipboardData;
@@ -85,7 +93,7 @@ export const TextBlock = forwardRef(function TextBlock({words}: TextProp, ref) {
     }
 
     return (
-        <div className="min-h-10" contentEditable={pastedType == "Text" ? "plaintext-only" : undefined}
+        <div className="min-h-10 max-w-max" contentEditable={pastedType == "Text" ? "plaintext-only" : undefined}
              suppressContentEditableWarning={true}
 
              onInput={(event) => {
@@ -136,9 +144,7 @@ export const TextBlock = forwardRef(function TextBlock({words}: TextProp, ref) {
                     )
                 }) :
                     (pastedType === "Table" && tableData !== undefined ?
-                            <Table rows={tableData}>
-
-                            </Table> :
+                            <TableTest headers={tableHeaders} minCellWidth={120} key={1}> </TableTest> :
                             null
                     )
             }
