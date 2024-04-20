@@ -37,7 +37,6 @@ export const TextBlock = forwardRef(function TextBlock({words}: TextProp, ref) {
                     let content = cell.textContent;
 
                     if (content !== null) {
-
                         row_cell.push(content);
                     }
                 }
@@ -86,7 +85,7 @@ export const TextBlock = forwardRef(function TextBlock({words}: TextProp, ref) {
     }
 
     return (
-        <div className="min-h-10" contentEditable={pastedType == "Text" ? "plaintext-only" : "false"}
+        <div className="min-h-10" contentEditable={pastedType == "Text" ? "plaintext-only" : undefined}
              suppressContentEditableWarning={true}
 
              onInput={(event) => {
@@ -137,7 +136,7 @@ export const TextBlock = forwardRef(function TextBlock({words}: TextProp, ref) {
                     )
                 }) :
                     (pastedType === "Table" && tableData !== undefined ?
-                            <Table tableData={tableData}>
+                            <Table rows={tableData}>
 
                             </Table> :
                             null
