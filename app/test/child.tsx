@@ -1,26 +1,37 @@
 "use client"
-import {useCallback, useContext, useEffect} from "react";
+import {useContext, useEffect, useState} from "react";
 import {SocketContext} from "@/app/context/socket";
 
-export const GrandChild = () => {
-    const socket = useContext(SocketContext);
+interface GrandChildProp {
+    uuid: string;
+}
 
+interface BlockTest {
+    value: string;
+}
+
+export const GrandChild = ({uuid}: GrandChildProp) => {
+    const socket = useContext(SocketContext);
+    const [blocks, setBlocks] = useState<BlockTest[]>([]);
 
     useEffect(() => {
-        socket.emit("message", "qwerqwer");
-        socket.emit("chatting", "qwerqwer");
+
+        socket.emit("connection", {id: uuid, test_blocks: blocks});
+
     });
 
     return (
-        <div>
-            <button onClick={() => {
+        blocks.length == 0 && (
+            <div contentEditable={true} suppressHydrationWarning={true}
+                 onChange={(event) => {
+                     console.log(event.currentTarget)
+                 }}
+                 onKeyDown={(event) => {
 
-                socket.on('broadcast', function (msg) {
-                    console.log(msg);
-                });
-            }}>
-                join Channel
-            </button>
-        </div>
+                 }}>
+
+            </div>
+        )
+
     );
 };
