@@ -18,26 +18,50 @@ interface ClientProp {
 }
 
 interface IBlock {
-    value: string;
-    type: "Default" | "Table" | "Text";
-    content: IContent[];
+    pageId: string,
+    content: IContent[]
+    isEditing: boolean
+}
+
+interface IRange {
+    start: number;
+    end: number;
+}
+
+interface IWord {
+    text: string;
+    style: IStyle[];
 }
 
 interface IContent {
     blockType: "Text" | "Paragraph" | "Table";
+    words: IWord;
+}
+
+interface IResult {
     text: string;
-    styles: IStyles;
+    style?: IStyle;
 }
 
 type TextDecoration = "Bold" | "Italic" | "Underline" | "Strike"
 
-interface IStyles {
-    bold: boolean;
-    italic: boolean;
-    underline: boolean;
-    strike: boolean;
-    backgroundColor: any;
-    textAlignment: any;
+interface IStyle {
+    bold?: boolean;
+    italic?: boolean;
+    underline?: boolean;
+    strike?: boolean;
+    backgroundColor?: any;
+    textAlignment?: any;
+    range?: IRange;
+}
+
+interface Position {
+    x: number;
+    y: number;
+}
+
+interface PositionProp {
+    position: Position;
 }
 
 interface Row {
