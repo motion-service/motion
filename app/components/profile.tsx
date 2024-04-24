@@ -1,15 +1,14 @@
 import Image from "next/image";
-import React from "react";
+import React, {useContext} from "react";
+import {ProfileContext} from "@/app/context/ProfileProvider";
 
-interface ProfileProp {
-    position: Position;
-}
-
-export const Profile = ({position}: ProfileProp) => {
+export const Profile = () => {
+    let profileContext = useContext(ProfileContext);
+    let position = profileContext?.position.position;
 
     return (
         <div className="absolute rounded-full duration-100"
-             style={{top: `${position.y}px`, left: `${position.x - 50}px`}}>
+             style={{top: `${position?.y}px`, left: `${position?.x - 35}px`}}>
             <Image
                 src={"https://avatars.githubusercontent.com/u/11320397"}
                 alt={""}
