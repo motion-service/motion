@@ -1,26 +1,17 @@
 "use client"
 
+import {useAccount} from "@/app/hook/useAccount";
 import {PageList} from "@/app/components/props/page-list";
 import {Editor} from "@/app/components/props/editor";
-import {useEffect, useState} from "react";
-import {Navbar} from "@/app/components/ui/navbar";
-import {CommandMenu} from "@/app/components/props/command-demo";
-import {useAccount} from "@/app/hook/useAccount";
-import {cookies} from "next/headers";
+import React from "react";
 
 export const Client = ({uuid}: ClientProp) => {
     let {data} = useAccount();
 
     return (
-        <main className="flex flex-col h-screen overflow-hidden">
-            <CommandMenu/>
-            <div className="flex flex-row flex-grow overflow-y-auto">
-                {/*<PageList uuid={data?.id}/>*/}
-
-                <div className="flex-grow flex flex-col overflow-y-auto">
-                    <Editor uuid={uuid} owner={data?.id}></Editor>
-                </div>
-            </div>
-        </main>
+        <div className="relative h-screen overflow-hidden md:flex">
+            <PageList uuid={data?.id}/>
+            <Editor uuid={uuid} owner={data?.id}></Editor>
+        </div>
     )
 }
