@@ -8,7 +8,7 @@ export const Profile = () => {
 
     return (
         <div className="absolute rounded-full duration-100"
-             style={{top: `${position?.y}px`, left: `${position?.x - 35}px`}}>
+             style={{top: `${position!.y}px`, left: `${position!.x - 35}px`}}>
             <Image
                 src={"https://avatars.githubusercontent.com/u/11320397"}
                 alt={""}
