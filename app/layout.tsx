@@ -18,8 +18,8 @@ export default async function RootLayout({
 }>) {
 
     return (
-        <html lang="en" suppressHydrationWarning={true}>
-        <body className={inter.className} suppressHydrationWarning={true}>
+        <html lang="en" suppressHydrationWarning>
+        <body className={`${inter.className} antialiased`} suppressHydrationWarning>
 
         <QueryClientProviderOverride>
             <NextAuthProvider>
@@ -34,7 +34,6 @@ export default async function RootLayout({
 
             </NextAuthProvider>
         </QueryClientProviderOverride>
-
 
         </body>
         </html>
