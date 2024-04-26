@@ -64,6 +64,11 @@ interface PositionProp {
     position: Position;
 }
 
+interface ITestBlock {
+    value: string;
+    roomId: string;
+}
+
 interface Row {
     cells: Cell[];
 }
