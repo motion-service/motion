@@ -1,6 +1,6 @@
 import {
     DropdownMenu,
-    DropdownMenuContent, DropdownMenuGroup,
+    DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
     DropdownMenuSeparator,
     DropdownMenuTrigger
 } from "@/app/components/ui/dropdown-menu";
@@ -12,6 +12,7 @@ import {MdContentCopy} from "react-icons/md";
 import {FaRegEdit} from "react-icons/fa";
 import {TiExportOutline} from "react-icons/ti";
 import {RiDeleteBin6Line} from "react-icons/ri";
+import axios from "axios";
 
 export function PageListDropdown() {
     return (
@@ -22,35 +23,48 @@ export function PageListDropdown() {
             <DropdownMenuContent className="w-56">
 
                 <DropdownMenuGroup>
-                    <PageListItemDropdown name={"Add to Favorites"}>
-                        <IoIosStarOutline size={18}/>
-                    </PageListItemDropdown>
+
+                    <DropdownMenuItem onClick={() => {
+                        // axios.post("https://localhost:8090/page/client/added_to_favorite")
+                    }}>
+                        <PageListItemDropdown name={"Add to Favorites"}>
+                            <IoIosStarOutline size={18}/>
+                        </PageListItemDropdown>
+                    </DropdownMenuItem>
+
 
                     <DropdownMenuSeparator/>
 
-                    <PageListItemDropdown name={"Copy link"}>
-                        <IoIosLink size={18}/>
-                    </PageListItemDropdown>
-                    <PageListItemDropdown name={"Duplicate"} shortcut={"Ctrl+D"}>
-                        <MdContentCopy size={18}/>
-                    </PageListItemDropdown>
+                    <DropdownMenuItem>
+                        <PageListItemDropdown name={"Copy link"}>
+                            <IoIosLink size={18}/>
+                        </PageListItemDropdown>
+                    </DropdownMenuItem>
 
-                    <PageListItemDropdown name={"Rename"} shortcut={"Ctrl+Shift+R"}>
-                        <FaRegEdit size={18}/>
-                    </PageListItemDropdown>
+                    <DropdownMenuItem>
+                        <PageListItemDropdown name={"Duplicate"} shortcut={"Ctrl+D"}>
+                            <MdContentCopy size={18}/>
+                        </PageListItemDropdown>
+                    </DropdownMenuItem>
 
-
-                    <PageListItemDropdown name={"Move to"} shortcut={"Ctrl+Shift+P"}>
-                        <TiExportOutline size={18}/>
-                    </PageListItemDropdown>
-
-
-
-                    <PageListItemDropdown name={"Delete"}>
-                        <RiDeleteBin6Line size={18}/>
-                    </PageListItemDropdown>
+                    <DropdownMenuItem>
+                        <PageListItemDropdown name={"Rename"} shortcut={"Ctrl+Shift+R"}>
+                            <FaRegEdit size={18}/>
+                        </PageListItemDropdown>
+                    </DropdownMenuItem>
 
 
+                    <DropdownMenuItem>
+                        <PageListItemDropdown name={"Move to"} shortcut={"Ctrl+Shift+P"}>
+                            <TiExportOutline size={18}/>
+                        </PageListItemDropdown>
+                    </DropdownMenuItem>
+
+                    <DropdownMenuItem>
+                        <PageListItemDropdown name={"Delete"}>
+                            <RiDeleteBin6Line size={18}/>
+                        </PageListItemDropdown>
+                    </DropdownMenuItem>
                 </DropdownMenuGroup>
             </DropdownMenuContent>
         </DropdownMenu>
