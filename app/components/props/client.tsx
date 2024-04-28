@@ -9,12 +9,11 @@ import ProfileProvider from "@/app/context/ProfileProvider";
 import BlockProvider from "@/app/context/BlockProvider";
 
 export const Client = () => {
-    let {data} = useAccount();
 
     return (
         <div className="relative h-screen overflow-hidden md:flex">
             <SocketContext.Provider value={socket}>
-                <PageList uuid={data?.id}/>
+                <PageList />
 
                 <ProfileProvider>
                     <BlockProvider>
