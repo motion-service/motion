@@ -1,70 +1,77 @@
 "use client"
-import React, {useCallback, useContext, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {Button} from "@/app/components/ui/button";
-import {InputTest} from "@/app/components/props/input-test";
 import {Profile} from "@/app/components/profile";
 import {IoIosMore} from "react-icons/io";
 import {Content} from "@/app/components/ui/content";
-import {SocketContext} from "@/app/context/SocketProvider";
+import EmojiPicker from "emoji-picker-react";
+import {MdInsertEmoticon, MdOutlineComment} from "react-icons/md";
+import {CiImageOn} from "react-icons/ci";
+import {BiCommentDetail} from "react-icons/bi";
 
-interface EditorProp {
-    owner: string;
-    uuid: string;
-}
 
-export const Editor: React.FC<EditorProp> = ({uuid, owner}: EditorProp) => {
+export const Editor: React.FC = () => {
     // const {data, error} = useQuery(['pages', uuid], async () => await LoadPages(uuid));
-    let socket = useContext(SocketContext);
+    let [isIcon, setIcon] = useState<boolean>();
+    let [isCovered, setCovered] = useState<boolean>();
+    let [selectedEmoji, setSelectedEmoji] = useState<string>();
 
-    useEffect(() => {
-        socket.emit("join", uuid);
-        socket.emit("load_data", uuid);
-        socket.on("retrieve_blocks", function (test) {
-            console.log(test)
-        })
-    }, []);
     return (
         <>
-            <main className="flex-1 flex-col h-screen overflow-y-auto">
-                <header className="flex items-center w-full h-[48px] bg-[#191919] px-5">
+            <main className="flex-1 flex-col h-screen overflow-y-auto overflow-x-hidden">
+                <header className="flex items-center text-center w-full h-[48px] bg-[#191919] px-5">
                     <div className="flex w-full justify-between">
 
-                    <span>
-                    Untitled
-                    </span>
+                        <div>
+                            asdf
+                        </div>
                         <div>
                             <Button variant={"ghost"} className="">
                                 <IoIosMore/>
                             </Button>
                         </div>
                     </div>
-
                 </header>
+
                 <div
                     className="grid grid-cols-[100px_minmax(600px,_1fr)_100px] grid-rows-subgrid w-full overflow-hidden">
                     <div>
                     </div>
 
                     <div className="font-bold text-4xl mt-10">
-                        <div className="min-h-10 flex group">
+                        {isIcon && <div className="absolute">
+                            <EmojiPicker onEmojiClick={emoji => {
+                                console.log(emoji)
+                            }}/>
+
+                        </div>}
+                        <div className="flex min-h-10 group">
+                            {!isIcon &&
+                                <Button variant="ghost"
+                                        className="opacity-0 flex space-x-2 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"
+                                        onClick={event => {
+                                            setIcon(true)
+                                        }}>
+                                    <MdInsertEmoticon size={20}/>
+                                    <span>Add icon</span>
+                                </Button>
+                            }
+
+
+
                             <Button variant="ghost"
-                                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-                                Add icon
-                            </Button>
-                            <Button variant="ghost"
-                                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-                                Add Covered
-                            </Button>
-                            <Button variant="ghost"
-                                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-                                Add Comment
+                                    className="opacity-0 flex space-x-2 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+
+                                <BiCommentDetail size={20}/>
+                                <span>Add Comment</span>
                             </Button>
                         </div>
-                        <div className="focus:outline-none"
+                        <div className="focus:outline-none break-words"
                              contentEditable={true}
                              suppressContentEditableWarning={true}
-                             suppressHydrationWarning={true}>
-                            Untitled
+                             suppressHydrationWarning={true}
+                             data-placeholder={"Untitled"}
+                        >
                         </div>
                     </div>
 
