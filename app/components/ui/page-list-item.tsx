@@ -2,15 +2,6 @@
 import {RiPagesLine} from "react-icons/ri";
 import React from "react";
 import {ToggleGroupItem} from "@/app/components/ui/toggle-group";
-import {IoIosMore} from "react-icons/io";
-import {Button} from "@/app/components/ui/button";
-import {
-    DropdownMenu,
-    DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
-    DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut,
-    DropdownMenuTrigger
-} from "@/app/components/ui/dropdown-menu";
-import {Keyboard} from "lucide-react";
 import {useRouter} from "next/navigation";
 import {PageListDropdown} from "@/app/components/props/page-list-dropdown";
 
@@ -23,7 +14,7 @@ export const PageListItem = ({title, uuid}: PageListItemProp) => {
     let router = useRouter();
 
     const handleClick = () => {
-
+        router.push(`/${uuid}`);
     }
 
     return (
@@ -52,9 +43,7 @@ export const PageListItem = ({title, uuid}: PageListItemProp) => {
                 </ToggleGroupItem>
             </div>
 
-            <PageListDropdown>
-
-            </PageListDropdown>
+            <PageListDropdown/>
         </div>
     )
 }
